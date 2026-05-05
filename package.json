@@ -1,0 +1,20 @@
+{
+  "name": "saas-boilerplate",
+  "private": true,
+  "packageManager": "pnpm@10.22.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "check": "turbo typecheck lint test",
+    "db:generate": "turbo db:generate",
+    "db:migrate": "turbo db:migrate",
+    "db:seed": "turbo db:seed"
+  },
+  "devDependencies": {
+    "turbo": "^2.6.0",
+    "typescript": "^5.8.0"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@packages/types": ["./packages/types/src"],
+      "@packages/db": ["./packages/db/src"],
+      "@packages/core": ["./packages/core/src"],
+      "@packages/ai": ["./packages/ai/src"],
+      "@packages/ui": ["./packages/ui/src"]
+    }
+  }
+}
