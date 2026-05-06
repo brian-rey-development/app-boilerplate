@@ -7,6 +7,10 @@ type Env = { Variables: { authContext?: AuthContext } }
 const SUPABASE_URL = process.env.SUPABASE_URL
 const SUPABASE_JWT_SECRET = process.env.SUPABASE_JWT_SECRET
 
+if (!SUPABASE_URL && !SUPABASE_JWT_SECRET) {
+  throw new Error('Auth middleware requires SUPABASE_URL or SUPABASE_JWT_SECRET to be configured')
+}
+
 let jwks: ReturnType<typeof createRemoteJWKSet> | undefined
 if (SUPABASE_URL) {
   jwks = createRemoteJWKSet(new URL(`${SUPABASE_URL}/.well-known/jwks.json`))
@@ -29,21 +33,13 @@ export const authMiddleware = createMiddleware<Env>(async (c, next) => {
         return c.json({ ok: false, error: { code: 'UNAUTHORIZED', message: 'Invalid token payload' } }, 401)
       }
       c.set('authContext', { userId: payload.sub })
-    } else if (SUPABASE_JWT_SECRET) {
-      const secretKey = new TextEncoder().encode(SUPABASE_JWT_SECRET)
+    } else {
+      const secretKey = new TextEncoder().encode(SUPABASE_JWT_SECRET!)
       const { payload } = await jwtVerify(token, secretKey)
       if (!payload.sub) {
         return c.json({ ok: false, error: { code: 'UNAUTHORIZED', message: 'Invalid token payload' } }, 401)
       }
       c.set('authContext', { userId: payload.sub })
-    } else {
-      // Fallback: decode without cryptographic verification
-      const payload = JSON.parse(Buffer.from(token.split('.')[1]!, 'base64url').toString())
-      if (payload.exp && Date.now() >= payload.exp * 1000) {
-        return c.json({ ok: false, error: { code: 'UNAUTHORIZED', message: 'Token expired' } }, 401)
-      }
-      c.set('authContext', { userId: payload.sub })
-      // TODO: Set SUPABASE_URL or SUPABASE_JWT_SECRET for proper JWT verification
     }
   } catch {
     return c.json({ ok: false, error: { code: 'UNAUTHORIZED', message: 'Invalid token' } }, 401)

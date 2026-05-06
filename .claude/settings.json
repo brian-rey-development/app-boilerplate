@@ -1,9 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pnpm typecheck)",
-      "Bash(pnpm lint)",
-      "Bash(pnpm view *)",
+      "Bash(pnpm *)",
+      "Bash(rtk *)",
       "Bash(mkdir -p *)"
     ]
   }

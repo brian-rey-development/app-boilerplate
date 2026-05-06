@@ -5,3 +5,5 @@ export type { CreateOrganizationInput, UpdateOrganizationInput, InviteMemberInpu
 export { register } from './auth'
 export { registerSchema } from './auth/schemas'
 export type { RegisterInput } from './auth/schemas'
+export { logAuditEvent } from './audit'
+export type { AuditEventInput } from './audit'
