@@ -15,9 +15,9 @@
     "eval": "tsx evals/run.ts"
   },
   "dependencies": {
-    "ai": "^6.0.0",
     "@ai-sdk/anthropic": "^3.0.0",
     "@ai-sdk/openai": "^3.0.0",
+    "ai": "^6.0.0",
     "langfuse": "^3.38.0",
     "zod": "^4.4.0"
   },
@@ -25,6 +25,6 @@
     "@types/node": "^22.0.0",
     "tsx": "^4.19.0",
     "typescript": "^5.8.0",
-    "vitest": "^3.1.0"
+    "vitest": "^3.2.7"
   }
 }
